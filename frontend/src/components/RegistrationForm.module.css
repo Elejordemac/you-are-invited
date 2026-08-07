@@ -342,7 +342,7 @@
   justify-content: center;
   background: radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%);
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .backBtn {
@@ -482,6 +482,90 @@
 .submitButton:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* === ENTRANCE ANIMATION === */
+.animateIn {
+  opacity: 0;
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+/* === COUNTDOWN TIMER === */
+.countdown {
+  margin-bottom: 1.5rem;
+}
+
+.countdownRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.countdownBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdownNumber {
+  font-family: 'Bebas Neue', 'Anton', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: #42a5f5;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(66, 165, 245, 0.4);
+}
+
+.countdownLabel {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  color: #90caf9;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 0.2rem;
+}
+
+.countdownText {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  color: #90caf9;
+  margin: 0.5rem 0 0 0;
+  letter-spacing: 1px;
+}
+
+/* === TEXTAREA === */
+.textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.95rem;
+  border: 2px solid #1e3a5f;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  background: rgba(10, 25, 41, 0.8);
+  color: #e3f2fd;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.textarea::placeholder {
+  color: #546e7a;
+}
+
+.textarea:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.15);
+}
+
+.charCount {
+  display: block;
+  text-align: right;
+  font-size: 0.7rem;
+  color: #546e7a;
+  margin-top: 0.2rem;
 }
 
 /* === MOBILE === */

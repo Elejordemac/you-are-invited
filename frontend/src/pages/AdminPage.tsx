@@ -347,6 +347,32 @@ export default function AdminPage() {
     }
   }
 
+  // --- CSV Export ---
+
+  function handleDownloadCSV() {
+    if (guests.length === 0) return;
+
+    const headers = ['Name', 'Email', 'RSVP Status', 'Approval Status', 'Submitted At'];
+    const rows = guests.map((g) => [
+      `"${(g.name || '').replace(/"/g, '""')}"`,
+      `"${(g.email || '').replace(/"/g, '""')}"`,
+      `"${g.rsvpStatus || ''}"`,
+      `"${g.approvalStatus || ''}"`,
+      `"${g.submittedAt || ''}"`,
+    ]);
+
+    const csvContent = [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `guests_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
   // --- Render ---
 
   if (!token) {
@@ -357,9 +383,14 @@ export default function AdminPage() {
     <div className={styles.pageContainer}>
       <div className={styles.topBar}>
         <h1 className={styles.pageTitle}>Admin Panel</h1>
-        <button className={styles.logoutBtn} onClick={() => { sessionStorage.removeItem('adminToken'); setToken(null); }}>
-          Log Out
-        </button>
+        <div className={styles.topBarActions}>
+          <button className={styles.csvBtn} onClick={handleDownloadCSV} disabled={guests.length === 0}>
+            📥 Download CSV
+          </button>
+          <button className={styles.logoutBtn} onClick={() => { sessionStorage.removeItem('adminToken'); setToken(null); }}>
+            Log Out
+          </button>
+        </div>
       </div>
 
       {/* Status messages */}

@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './RegistrationForm.module.css';
 import HealingPod from './HealingPod';
@@ -9,6 +9,8 @@ export interface RegistrationData {
   name: string;
   email: string;
   rsvpStatus: RsvpStatus;
+  companions: number;
+  dietaryRestrictions: string;
 }
 
 interface RegistrationFormProps {
@@ -22,6 +24,24 @@ interface FieldErrors {
 }
 
 const RSVP_OPTIONS: RsvpStatus[] = ['Attending', 'Not Attending', 'Undecided'];
+
+// Target date: September 5, 2026 at 3:00 PM Manila time (UTC+8)
+const EVENT_DATE = new Date('2026-09-05T15:00:00+08:00');
+
+function getTimeRemaining() {
+  const now = new Date();
+  const diff = EVENT_DATE.getTime() - now.getTime();
+
+  if (diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0 };
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+  return { days, hours, minutes };
+}
 
 function validateName(name: string): string | undefined {
   const trimmed = name.trim();
@@ -56,8 +76,19 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [rsvpStatus, setRsvpStatus] = useState('');
+  const [companions, setCompanions] = useState(0);
+  const [dietaryRestrictions, setDietaryRestrictions] = useState('');
   const [errors, setErrors] = useState<FieldErrors>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(getTimeRemaining());
+
+  // Countdown timer
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeRemaining(getTimeRemaining());
+    }, 60000); // Update every minute
+    return () => clearInterval(interval);
+  }, []);
 
   function validate(): FieldErrors {
     const fieldErrors: FieldErrors = {};
@@ -82,6 +113,8 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
         name: name.trim(),
         email: email.trim(),
         rsvpStatus: rsvpStatus as RsvpStatus,
+        companions,
+        dietaryRestrictions: dietaryRestrictions.trim(),
       });
     } finally {
       setIsLoading(false);
@@ -119,21 +152,21 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
           <div className={`${styles.particle} ${styles.particle3}`} aria-hidden="true" />
 
           <div className={styles.inviteContent}>
-            <div className={styles.badge}>YOU'RE INVITED</div>
+            <div className={`${styles.badge} ${styles.animateIn}`} style={{ animationDelay: '0s' }}>YOU'RE INVITED</div>
             
-            <h1 className={styles.heroTitle}>
+            <h1 className={`${styles.heroTitle} ${styles.animateIn}`} style={{ animationDelay: '0.2s' }}>
               <span className={styles.titleGlow}>Baby Shower</span>
             </h1>
 
-            <div className={styles.parents}>
+            <div className={`${styles.parents} ${styles.animateIn}`} style={{ animationDelay: '0.4s' }}>
               <span className={styles.parentName}>Mark Rhey Elejorde</span>
               <span className={styles.ampersand}>&</span>
               <span className={styles.parentName}>Rochelle Ann Reyos</span>
             </div>
 
-            <div className={styles.divider} aria-hidden="true" />
+            <div className={`${styles.divider} ${styles.animateIn}`} style={{ animationDelay: '0.6s' }} aria-hidden="true" />
 
-            <div className={styles.eventInfo}>
+            <div className={`${styles.eventInfo} ${styles.animateIn}`} style={{ animationDelay: '0.7s' }}>
               <div className={styles.infoRow}>
                 <span className={styles.infoIcon}>📅</span>
                 <span className={styles.infoText}>September 5, 2026 &bull; 3:00 PM</span>
@@ -144,7 +177,26 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
               </div>
             </div>
 
-            <div className={styles.buttonStack}>
+            {/* Countdown Timer */}
+            <div className={`${styles.countdown} ${styles.animateIn}`} style={{ animationDelay: '0.8s' }}>
+              <div className={styles.countdownRow}>
+                <div className={styles.countdownBlock}>
+                  <span className={styles.countdownNumber}>{timeRemaining.days}</span>
+                  <span className={styles.countdownLabel}>days</span>
+                </div>
+                <div className={styles.countdownBlock}>
+                  <span className={styles.countdownNumber}>{timeRemaining.hours}</span>
+                  <span className={styles.countdownLabel}>hours</span>
+                </div>
+                <div className={styles.countdownBlock}>
+                  <span className={styles.countdownNumber}>{timeRemaining.minutes}</span>
+                  <span className={styles.countdownLabel}>minutes</span>
+                </div>
+              </div>
+              <p className={styles.countdownText}>until the Baby Shower!</p>
+            </div>
+
+            <div className={`${styles.buttonStack} ${styles.animateIn}`} style={{ animationDelay: '0.9s' }}>
               <button
                 className={styles.proceedBtn}
                 onClick={() => setScreen('rsvp')}
@@ -240,6 +292,36 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
                 ))}
               </select>
               {errors.rsvpStatus && <p className={styles.errorText}>{errors.rsvpStatus}</p>}
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label htmlFor="reg-companions" className={styles.label}>Number of Companions (optional)</label>
+              <input
+                id="reg-companions"
+                type="number"
+                min={0}
+                max={5}
+                className={styles.input}
+                value={companions}
+                onChange={(e) => {
+                  const val = Math.max(0, Math.min(5, parseInt(e.target.value) || 0));
+                  setCompanions(val);
+                }}
+              />
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label htmlFor="reg-dietary" className={styles.label}>Dietary Restrictions / Allergies (optional)</label>
+              <textarea
+                id="reg-dietary"
+                maxLength={200}
+                className={styles.textarea}
+                value={dietaryRestrictions}
+                onChange={(e) => setDietaryRestrictions(e.target.value)}
+                placeholder="e.g., Vegetarian, No peanuts..."
+                rows={3}
+              />
+              <span className={styles.charCount}>{dietaryRestrictions.length}/200</span>
             </div>
 
             <button

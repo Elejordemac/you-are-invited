@@ -13,6 +13,66 @@ interface ServerFieldError {
   message: string;
 }
 
+const CONFETTI_COLORS = ['#42a5f5', '#90caf9', '#1e88e5', '#ffd54f', '#81c784'];
+const CONFETTI_COUNT = 25;
+
+function ConfettiEffect() {
+  const pieces = Array.from({ length: CONFETTI_COUNT }, (_, i) => {
+    const color = CONFETTI_COLORS[i % CONFETTI_COLORS.length];
+    const left = Math.random() * 100;
+    const delay = Math.random() * 3;
+    const duration = 2.5 + Math.random() * 2;
+    const size = 6 + Math.random() * 8;
+    const rotation = Math.random() * 360;
+
+    return (
+      <div
+        key={i}
+        style={{
+          position: 'absolute',
+          top: '-20px',
+          left: `${left}%`,
+          width: `${size}px`,
+          height: `${size * 0.6}px`,
+          background: color,
+          borderRadius: '2px',
+          opacity: 0.9,
+          transform: `rotate(${rotation}deg)`,
+          animation: `confettiFall ${duration}s ease-in ${delay}s infinite`,
+        }}
+        aria-hidden="true"
+      />
+    );
+  });
+
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        pointerEvents: 'none',
+        overflow: 'hidden',
+        zIndex: 201,
+      }}
+      aria-hidden="true"
+    >
+      <style>{`
+        @keyframes confettiFall {
+          0% {
+            transform: translateY(-20px) rotate(0deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+          }
+        }
+      `}</style>
+      {pieces}
+    </div>
+  );
+}
+
 export default function RegistrationPage() {
   const navigate = useNavigate();
   const [submissionState, setSubmissionState] = useState<SubmissionState>({ status: 'idle' });
@@ -68,44 +128,47 @@ export default function RegistrationPage() {
   // Success screen - full screen Marvel style
   if (submissionState.status === 'success') {
     return (
-      <div style={{
-        position: 'fixed', inset: 0, zIndex: 200,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: 'radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%)',
-        color: '#e3f2fd', textAlign: 'center', padding: '2rem',
-      }}>
-        <div>
-          <div style={{
-            fontSize: '3rem', marginBottom: '1rem',
-          }}>✓</div>
-          <h2 style={{
-            color: '#42a5f5', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
-            fontWeight: 700, marginBottom: '1rem', letterSpacing: '1px',
-          }}>REGISTRATION CONFIRMED</h2>
-          <p style={{ color: '#b3e5fc', fontSize: '1rem', lineHeight: 1.6 }}>
-            {submissionState.message}
-          </p>
-          <button
-            onClick={() => navigate('/wishlist')}
-            style={{
-              marginTop: '1.5rem',
-              padding: '0.7rem 2rem',
-              background: 'transparent',
-              border: '2px solid rgba(255, 213, 79, 0.6)',
-              borderRadius: '6px',
-              color: '#ffd54f',
-              fontSize: '0.85rem',
-              fontWeight: 700,
-              letterSpacing: '2px',
-              cursor: 'pointer',
-              fontFamily: "'Bebas Neue', 'Anton', sans-serif",
-              transition: 'all 0.3s ease',
-            }}
-          >
-            🎁 VIEW GIFT IDEAS
-          </button>
+      <>
+        <ConfettiEffect />
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 200,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: 'radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%)',
+          color: '#e3f2fd', textAlign: 'center', padding: '2rem',
+        }}>
+          <div>
+            <div style={{
+              fontSize: '3rem', marginBottom: '1rem',
+            }}>✓</div>
+            <h2 style={{
+              color: '#42a5f5', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
+              fontWeight: 700, marginBottom: '1rem', letterSpacing: '1px',
+            }}>REGISTRATION CONFIRMED</h2>
+            <p style={{ color: '#b3e5fc', fontSize: '1rem', lineHeight: 1.6 }}>
+              {submissionState.message}
+            </p>
+            <button
+              onClick={() => navigate('/wishlist')}
+              style={{
+                marginTop: '1.5rem',
+                padding: '0.7rem 2rem',
+                background: 'transparent',
+                border: '2px solid rgba(255, 213, 79, 0.6)',
+                borderRadius: '6px',
+                color: '#ffd54f',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                letterSpacing: '2px',
+                cursor: 'pointer',
+                fontFamily: "'Bebas Neue', 'Anton', sans-serif",
+                transition: 'all 0.3s ease',
+              }}
+            >
+              🎁 VIEW GIFT IDEAS
+            </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 

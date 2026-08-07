@@ -4,6 +4,8 @@ export interface RegisterGuestData {
   name: string;
   email: string;
   rsvpStatus: 'Attending' | 'Not Attending' | 'Undecided';
+  companions?: number;
+  dietaryRestrictions?: string;
 }
 
 /**
