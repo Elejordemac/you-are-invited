@@ -3,10 +3,31 @@
 .container {
   min-height: 100vh;
   padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Rajdhani', 'Segoe UI', sans-serif;
   position: relative;
   background: radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%);
   color: #e3f2fd;
+}
+
+.backBtn {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: transparent;
+  border: 1px solid #42a5f5;
+  border-radius: 6px;
+  color: #42a5f5;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.backBtn:hover {
+  background: rgba(66, 165, 245, 0.1);
 }
 
 .header {

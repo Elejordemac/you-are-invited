@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './GuestListView.module.css';
 import { CornerFootprints, HeaderDecorations } from './Decorations';
 
@@ -68,8 +69,18 @@ function getApprovalBadgeClass(status: Guest['approvalStatus']): string {
  * Requirements: 2.1, 2.2, 2.3, 2.5
  */
 export default function GuestListView({ guests, counts }: GuestListViewProps) {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
+      <button
+        className={styles.backBtn}
+        onClick={() => navigate('/')}
+        type="button"
+      >
+        ← Back
+      </button>
+
       <div className={styles.header}>
         <HeaderDecorations />
         <h2 className={styles.title}>Guest List</h2>

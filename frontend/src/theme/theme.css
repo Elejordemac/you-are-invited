@@ -98,34 +98,16 @@
 .theme-root {
   font-family: var(--font-family);
   color: var(--color-text-dark);
-  background: var(--gradient-bg);
+  background: #000d1a;
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Sparkle Decorations */
+/* Sparkle Decorations - hidden for dark theme */
 .theme-root::before,
 .theme-root::after {
-  content: '✦';
-  position: fixed;
-  font-size: 1.5rem;
-  color: var(--color-primary-accent);
-  opacity: 0.3;
-  animation: sparkle 3s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.theme-root::before {
-  top: 10%;
-  right: 5%;
-  animation-delay: 0s;
-}
-
-.theme-root::after {
-  bottom: 15%;
-  left: 8%;
-  animation-delay: 1.5s;
+  display: none;
 }
 
 /* Headings */

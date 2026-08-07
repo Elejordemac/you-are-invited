@@ -3,7 +3,7 @@
 .pageContainer {
   min-height: 100vh;
   padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Rajdhani', 'Segoe UI', sans-serif;
   background: radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%);
   color: #e3f2fd;
 }
