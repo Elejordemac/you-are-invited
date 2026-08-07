@@ -95,7 +95,24 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
         <div className={styles.inviteContainer}>
           {/* Hex pattern background overlay */}
           <div className={styles.hexOverlay} aria-hidden="true" />
-          
+
+          {/* Healing Pod in background - baby healing behind everything */}
+          <div className={styles.healingPodBg} aria-hidden="true">
+            <HealingPod />
+          </div>
+
+          {/* Background bubbles - underwater feel */}
+          <div className={styles.bgBubble} aria-hidden="true" />
+          <div className={`${styles.bgBubble} ${styles.bgBubble2}`} aria-hidden="true" />
+          <div className={`${styles.bgBubble} ${styles.bgBubble3}`} aria-hidden="true" />
+          <div className={`${styles.bgBubble} ${styles.bgBubble4}`} aria-hidden="true" />
+          <div className={`${styles.bgBubble} ${styles.bgBubble5}`} aria-hidden="true" />
+          <div className={`${styles.bgBubble} ${styles.bgBubble6}`} aria-hidden="true" />
+          <div className={`${styles.bgBubble} ${styles.bgBubble7}`} aria-hidden="true" />
+          <div className={`${styles.bgBubble} ${styles.bgBubble8}`} aria-hidden="true" />
+          <div className={`${styles.bgBubble} ${styles.bgBubble9}`} aria-hidden="true" />
+          <div className={`${styles.bgBubble} ${styles.bgBubble10}`} aria-hidden="true" />
+
           {/* Floating particles */}
           <div className={styles.particle} aria-hidden="true" />
           <div className={`${styles.particle} ${styles.particle2}`} aria-hidden="true" />
@@ -127,25 +144,23 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
               </div>
             </div>
 
-            <button
-              className={styles.proceedBtn}
-              onClick={() => setScreen('rsvp')}
-              type="button"
-            >
-              <span>ASSEMBLE YOUR RSVP</span>
-              <span className={styles.btnArrow}>→</span>
-            </button>
+            <div className={styles.buttonStack}>
+              <button
+                className={styles.proceedBtn}
+                onClick={() => setScreen('rsvp')}
+                type="button"
+              >
+                <span>ASSEMBLE YOUR RSVP</span>
+                <span className={styles.btnArrow}>→</span>
+              </button>
 
-            <button
-              className={styles.guestListBtn}
-              onClick={() => navigate('/guests')}
-              type="button"
-            >
-              <span>VIEW GUEST LIST</span>
-            </button>
-
-            <div className={styles.healingPodContainer}>
-              <HealingPod />
+              <button
+                className={styles.guestListBtn}
+                onClick={() => navigate('/guests')}
+                type="button"
+              >
+                <span>VIEW GUEST LIST</span>
+              </button>
             </div>
           </div>
         </div>

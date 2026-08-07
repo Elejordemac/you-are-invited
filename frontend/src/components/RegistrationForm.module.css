@@ -219,6 +219,15 @@
   transform: translateX(4px);
 }
 
+/* Button stack - vertical layout */
+.buttonStack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
 /* Guest List Button */
 .guestListBtn {
   display: inline-flex;
@@ -234,7 +243,6 @@
   letter-spacing: 2px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 1rem;
 }
 
 .guestListBtn:hover {
@@ -243,12 +251,57 @@
   color: #e3f2fd;
 }
 
-/* Healing Pod on invitation */
-.healingPodContainer {
-  margin-top: 2rem;
-  opacity: 0.85;
-  animation: fadeInUp 1.5s ease-out 0.5s both;
+/* Healing Pod as background element */
+.healingPodBg {
+  position: absolute;
+  bottom: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60vw;
+  max-width: 500px;
+  opacity: 0.18;
+  z-index: 1;
+  pointer-events: none;
+  filter: blur(1px);
 }
+
+/* Background bubbles - underwater healing tank feel */
+@keyframes bgBubbleRise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.bgBubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(144, 202, 249, 0.4), rgba(66, 165, 245, 0.1));
+  border: 1px solid rgba(66, 165, 245, 0.2);
+  pointer-events: none;
+  animation: bgBubbleRise 8s ease-in-out infinite;
+}
+
+.bgBubble { width: 12px; height: 12px; left: 10%; bottom: 5%; animation-duration: 9s; }
+.bgBubble2 { width: 8px; height: 8px; left: 25%; bottom: 10%; animation-duration: 7s; animation-delay: -2s; }
+.bgBubble3 { width: 18px; height: 18px; left: 70%; bottom: 3%; animation-duration: 11s; animation-delay: -4s; }
+.bgBubble4 { width: 6px; height: 6px; left: 85%; bottom: 8%; animation-duration: 6s; animation-delay: -1s; }
+.bgBubble5 { width: 14px; height: 14px; left: 45%; bottom: 2%; animation-duration: 10s; animation-delay: -3s; }
+.bgBubble6 { width: 10px; height: 10px; left: 60%; bottom: 12%; animation-duration: 8s; animation-delay: -5s; }
+.bgBubble7 { width: 16px; height: 16px; left: 15%; bottom: 15%; animation-duration: 12s; animation-delay: -7s; }
+.bgBubble8 { width: 7px; height: 7px; left: 90%; bottom: 6%; animation-duration: 7.5s; animation-delay: -2.5s; }
+.bgBubble9 { width: 20px; height: 20px; left: 35%; bottom: 0%; animation-duration: 13s; animation-delay: -6s; }
+.bgBubble10 { width: 9px; height: 9px; left: 55%; bottom: 18%; animation-duration: 8.5s; animation-delay: -4.5s; }
 
 /* === SCREEN 2: RSVP FORM === */
 .rsvpContainer {
