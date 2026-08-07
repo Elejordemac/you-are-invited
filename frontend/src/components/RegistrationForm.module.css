@@ -57,7 +57,7 @@
   background: radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%);
   position: relative;
   overflow: hidden;
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .hexOverlay {
@@ -105,8 +105,7 @@
 .inviteContent {
   text-align: center;
   z-index: 10;
-  padding: 2rem;
-  animation: fadeInUp 1s ease-out;
+  padding: 1rem 2rem;
 }
 
 .badge {
@@ -115,7 +114,7 @@
   justify-content: center;
   width: 100%;
   max-width: 280px;
-  padding: 0.4rem 1.5rem;
+  padding: 0.3rem 1.5rem;
   background: transparent;
   border: 2px solid #42a5f5;
   border-radius: 4px;
@@ -124,14 +123,14 @@
   font-weight: 700;
   letter-spacing: 4px;
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   animation: pulseGlow 3s ease-in-out infinite;
   font-family: 'Bebas Neue', 'Anton', sans-serif;
   box-sizing: border-box;
 }
 
 .heroTitle {
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 0.5rem 0;
 }
 
 .titleGlow {
@@ -152,8 +151,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
-  margin-bottom: 1.5rem;
+  gap: 0.2rem;
+  margin-bottom: 0.8rem;
 }
 
 .parentName {
@@ -178,11 +177,11 @@
   width: 120px;
   height: 2px;
   background: linear-gradient(90deg, transparent, #42a5f5, transparent);
-  margin: 1.5rem auto;
+  margin: 0.8rem auto;
 }
 
 .eventInfo {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .infoRow {
@@ -493,7 +492,7 @@
 
 /* === COUNTDOWN TIMER === */
 .countdown {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .countdownRow {
@@ -572,17 +571,31 @@
 /* === MOBILE === */
 @media (max-width: 480px) {
   .inviteContent {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
   }
 
   .badge {
     font-size: 0.65rem;
-    padding: 0.3rem 1rem;
+    padding: 0.25rem 1rem;
     letter-spacing: 3px;
+    max-width: 240px;
+  }
+
+  .titleGlow {
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+  }
+
+  .parentName {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
   }
 
   .proceedBtn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .guestListBtn {
+    padding: 0.6rem 1.5rem;
     font-size: 0.8rem;
   }
 
@@ -593,5 +606,25 @@
   .backBtn {
     top: 1rem;
     left: 1rem;
+  }
+
+  .countdownNumber {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .countdownLabel {
+    font-size: 0.65rem;
+  }
+
+  .buttonStack {
+    max-width: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .healingPodBg {
+    width: 90vw;
+    height: 90vw;
+    opacity: 0.18;
   }
 }
