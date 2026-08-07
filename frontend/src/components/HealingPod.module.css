@@ -9,9 +9,9 @@
 
 .podSvg {
   width: 100%;
-  max-width: 600px;
+  max-width: 900px;
   height: auto;
-  filter: drop-shadow(0 0 30px rgba(30, 136, 229, 0.4));
+  filter: drop-shadow(0 0 40px rgba(30, 136, 229, 0.5));
 }
 
 /* Bubble animations - float up and fade */
