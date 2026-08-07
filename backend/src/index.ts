@@ -1,9 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 import authRouter from './routes/auth';
 import guestsRouter from './routes/guests';
 import adminGuestsRouter from './routes/admin-guests';
+import pool from './db/index';
 
 dotenv.config();
 
@@ -24,6 +26,21 @@ app.use(express.json());
 // Health check endpoint
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
+});
+
+// TEMPORARY: Seed admin endpoint - remove after first use
+app.get('/api/seed-admin', async (_req, res) => {
+  try {
+    const hash = await bcrypt.hash('admin123', 10);
+    await pool.query('DELETE FROM admins WHERE username = $1', ['admin']);
+    await pool.query(
+      'INSERT INTO admins (username, password_hash) VALUES ($1, $2)',
+      ['admin', hash]
+    );
+    res.json({ success: true, message: 'Admin user seeded with password admin123' });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Public routes
