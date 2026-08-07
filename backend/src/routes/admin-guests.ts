@@ -198,11 +198,12 @@ router.post('/:id/approve', async (req: Request, res: Response) => {
         // Mark email as sent in the database
         await markEmailSent(id);
       } else {
-        emailWarning = 'Approval was saved but the notification email could not be sent';
+        emailWarning = `Approval was saved but the notification email could not be sent: ${emailResult.error || 'unknown error'}`;
+        console.error('Email send failed:', emailResult.error);
       }
-    } catch (emailError) {
+    } catch (emailError: any) {
       console.error('Error sending approval email:', emailError);
-      emailWarning = 'Approval was saved but the notification email could not be sent';
+      emailWarning = `Approval was saved but the notification email could not be sent: ${emailError.message || 'unknown error'}`;
     }
 
     const response: ApproveResponse = {
