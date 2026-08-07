@@ -293,6 +293,25 @@
   opacity: 0.25;
   z-index: 1;
   pointer-events: none;
+  animation: podFloat 8s ease-in-out infinite;
+}
+
+@keyframes podFloat {
+  0% {
+    transform: translate(-50%, -50%) translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateY(-15px) rotate(2deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(0px) rotate(0deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateY(15px) rotate(-2deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0px) rotate(0deg);
+  }
 }
 
 /* Background bubbles - underwater healing tank feel */
