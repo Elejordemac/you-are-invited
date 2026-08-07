@@ -50,14 +50,12 @@ export default function RegistrationPage() {
           });
         }
       } else {
-        // 500, 503, or any other server error
         setSubmissionState({
           status: 'error',
           message: 'Unable to save your registration. Please try again.',
         });
       }
     } catch {
-      // Network error or fetch failure
       setSubmissionState({
         status: 'error',
         message: 'Unable to save your registration. Please try again.',
@@ -65,19 +63,44 @@ export default function RegistrationPage() {
     }
   }
 
-  return (
-    <div>
-      {submissionState.status === 'success' && (
-        <div role="alert" aria-live="polite" className="confirmation-message">
-          <p>{submissionState.message}</p>
+  // Success screen - full screen Marvel style
+  if (submissionState.status === 'success') {
+    return (
+      <div style={{
+        position: 'fixed', inset: 0, zIndex: 200,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: 'radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%)',
+        color: '#e3f2fd', textAlign: 'center', padding: '2rem',
+      }}>
+        <div>
+          <div style={{
+            fontSize: '3rem', marginBottom: '1rem',
+          }}>✓</div>
+          <h2 style={{
+            color: '#42a5f5', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
+            fontWeight: 700, marginBottom: '1rem', letterSpacing: '1px',
+          }}>REGISTRATION CONFIRMED</h2>
+          <p style={{ color: '#b3e5fc', fontSize: '1rem', lineHeight: 1.6 }}>
+            {submissionState.message}
+          </p>
         </div>
-      )}
+      </div>
+    );
+  }
 
+  // Error overlay on top of form
+  return (
+    <>
       {submissionState.status === 'error' && (
-        <div role="alert" aria-live="polite" className="error-message">
-          <p>{submissionState.message}</p>
+        <div style={{
+          position: 'fixed', top: '1rem', left: '50%', transform: 'translateX(-50%)',
+          zIndex: 300, background: 'rgba(239, 83, 80, 0.9)', color: '#fff',
+          padding: '0.75rem 1.5rem', borderRadius: '8px', fontSize: '0.85rem',
+          maxWidth: '90%', textAlign: 'center',
+        }} role="alert">
+          <p style={{ margin: 0 }}>{submissionState.message}</p>
           {serverErrors.length > 0 && (
-            <ul>
+            <ul style={{ margin: '0.5rem 0 0', paddingLeft: '1rem', textAlign: 'left' }}>
               {serverErrors.map((err) => (
                 <li key={err.field}>{err.field}: {err.message}</li>
               ))}
@@ -85,10 +108,7 @@ export default function RegistrationPage() {
           )}
         </div>
       )}
-
-      {submissionState.status !== 'success' && (
-        <RegistrationForm onSubmit={handleSubmit} />
-      )}
-    </div>
+      <RegistrationForm onSubmit={handleSubmit} />
+    </>
   );
 }
