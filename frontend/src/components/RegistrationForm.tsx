@@ -161,6 +161,14 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
               >
                 <span>VIEW GUEST LIST</span>
               </button>
+
+              <button
+                className={styles.guestListBtn}
+                onClick={() => navigate('/wishlist')}
+                type="button"
+              >
+                <span>🎁 GIFT IDEAS</span>
+              </button>
             </div>
           </div>
         </div>

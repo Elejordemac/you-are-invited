@@ -3,6 +3,7 @@ import { ThemeProvider } from './theme';
 import RegistrationPage from './pages/RegistrationPage';
 import GuestListPage from './pages/GuestListPage';
 import AdminPage from './pages/AdminPage';
+import WishlistPage from './pages/WishlistPage';
 import './App.css';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Routes>
           <Route path="/" element={<RegistrationPage />} />
           <Route path="/guests" element={<GuestListPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </main>
