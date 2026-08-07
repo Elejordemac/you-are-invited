@@ -189,7 +189,6 @@ export default function AdminPanel({ token, guests: propGuests, counts: propCoun
                 <th>Email</th>
                 <th>RSVP Status</th>
                 <th>Approval Status</th>
-                <th>Email Sent</th>
                 <th>Registered At</th>
                 <th>Actions</th>
               </tr>
@@ -207,11 +206,6 @@ export default function AdminPanel({ token, guests: propGuests, counts: propCoun
                   <td data-label="Approval">
                     <span className={`${styles.badge} ${getApprovalBadgeClass(guest.approvalStatus)}`}>
                       {guest.approvalStatus}
-                    </span>
-                  </td>
-                  <td data-label="Email Sent">
-                    <span className={`${styles.badge} ${guest.approvalEmailSent ? styles.badgeEmailSent : styles.badgeEmailNotSent}`}>
-                      {guest.approvalEmailSent ? 'Yes' : 'No'}
                     </span>
                   </td>
                   <td data-label="Registered">{formatTimestamp(guest.submittedAt)}</td>

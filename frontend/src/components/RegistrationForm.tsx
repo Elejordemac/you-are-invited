@@ -136,7 +136,7 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
             <div className={styles.eventInfo}>
               <div className={styles.infoRow}>
                 <span className={styles.infoIcon}>📅</span>
-                <span className={styles.infoText}>September 26, 2025 &bull; 3:00 PM</span>
+                <span className={styles.infoText}>September 5, 2026 &bull; 3:00 PM</span>
               </div>
               <div className={styles.infoRow}>
                 <span className={styles.infoIcon}>📍</span>
