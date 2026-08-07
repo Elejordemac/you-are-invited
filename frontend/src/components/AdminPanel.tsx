@@ -31,6 +31,7 @@ interface AdminPanelProps {
   onEdit?: (guest: AdminGuest) => void;
   onDelete?: (guest: AdminGuest) => void;
   onApprove?: (guest: AdminGuest) => void;
+  onSendEmail?: (guest: AdminGuest) => void;
   approvingId?: string | null;
 }
 
@@ -85,7 +86,7 @@ function getApprovalBadgeClass(status: AdminGuest['approvalStatus']): string {
  *
  * Requirements: 6.4, 6.16, 6.17
  */
-export default function AdminPanel({ token, guests: propGuests, counts: propCounts, loading: propLoading, error: propError, onRetry, onEdit, onDelete, onApprove, approvingId }: AdminPanelProps) {
+export default function AdminPanel({ token, guests: propGuests, counts: propCounts, loading: propLoading, error: propError, onRetry, onEdit, onDelete, onApprove, onSendEmail, approvingId }: AdminPanelProps) {
   const [internalGuests, setInternalGuests] = useState<AdminGuest[]>([]);
   const [internalCounts, setInternalCounts] = useState<AdminGuestCounts>({ attending: 0, notAttending: 0, total: 0 });
   const [internalLoading, setInternalLoading] = useState(true);
@@ -224,6 +225,16 @@ export default function AdminPanel({ token, guests: propGuests, counts: propCoun
                           disabled={approvingId === guest.id}
                         >
                           {approvingId === guest.id ? 'Approving...' : 'Approve'}
+                        </button>
+                      )}
+                      {guest.approvalStatus === 'Approved' && (
+                        <button
+                          className={styles.btnApprove}
+                          onClick={() => onSendEmail?.(guest)}
+                          aria-label={`Send email to ${guest.name}`}
+                          disabled={approvingId === guest.id}
+                        >
+                          {approvingId === guest.id ? 'Sending...' : '📧 Email'}
                         </button>
                       )}
                       <button

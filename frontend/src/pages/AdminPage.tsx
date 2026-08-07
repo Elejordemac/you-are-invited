@@ -324,6 +324,26 @@ export default function AdminPage() {
     }
   }
 
+  // --- Send Email (for already approved guests) ---
+
+  async function handleSendEmail(guest: AdminGuest) {
+    setApprovingId(guest.id);
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        to_email: guest.email,
+        guest_name: guest.name,
+        rsvp_status: guest.rsvpStatus,
+      }, EMAILJS_PUBLIC_KEY);
+
+      setSuccessMessage(`Email sent to ${guest.email}!`);
+    } catch (emailErr) {
+      console.error('EmailJS error:', emailErr);
+      setErrorMessage(`Failed to send email to ${guest.email}. Check EmailJS configuration.`);
+    } finally {
+      setApprovingId(null);
+    }
+  }
+
   // --- Render ---
 
   if (!token) {
@@ -394,6 +414,7 @@ export default function AdminPage() {
         onEdit={handleEditClick}
         onDelete={handleDeleteClick}
         onApprove={handleApproveClick}
+        onSendEmail={handleSendEmail}
         approvingId={approvingId}
       />
 
