@@ -37,8 +37,8 @@
 /* === SLIDE BASE === */
 .slide {
   width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -46,20 +46,18 @@
   bottom: 0;
   z-index: 200;
   font-family: 'Rajdhani', 'Segoe UI', sans-serif;
-  overflow-y: auto;
 }
 
 /* === SCREEN 1: INVITATION === */
 .inviteContainer {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%);
   position: relative;
   overflow: hidden;
-  padding: 1rem 0;
 }
 
 .hexOverlay {
@@ -357,13 +355,15 @@
 /* === SCREEN 2: RSVP FORM === */
 .rsvpContainer {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%);
   position: relative;
-  padding: 1.5rem 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem;
   box-sizing: border-box;
 }
 
