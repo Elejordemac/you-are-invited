@@ -108,7 +108,11 @@
 }
 
 .badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 280px;
   padding: 0.4rem 1.5rem;
   background: transparent;
   border: 2px solid #42a5f5;
@@ -121,6 +125,7 @@
   margin-bottom: 1.5rem;
   animation: pulseGlow 3s ease-in-out infinite;
   font-family: 'Bebas Neue', 'Anton', sans-serif;
+  box-sizing: border-box;
 }
 
 .heroTitle {
@@ -200,7 +205,9 @@
 .proceedBtn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
+  width: 100%;
   padding: 0.9rem 2.5rem;
   background: linear-gradient(135deg, #1565c0, #0d47a1);
   border: 2px solid #42a5f5;
@@ -213,6 +220,7 @@
   transition: all 0.3s ease;
   animation: pulseGlow 3s ease-in-out infinite;
   font-family: 'Bebas Neue', 'Anton', sans-serif;
+  box-sizing: border-box;
 }
 
 .proceedBtn:hover {
@@ -237,14 +245,20 @@
   align-items: center;
   gap: 0.8rem;
   margin-top: 0.5rem;
+  width: 100%;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Guest List Button */
 .guestListBtn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.6rem 1.8rem;
+  width: 100%;
+  padding: 0.75rem 1.8rem;
   background: transparent;
   border: 2px solid rgba(66, 165, 245, 0.5);
   border-radius: 6px;
@@ -255,6 +269,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Bebas Neue', 'Anton', sans-serif;
+  box-sizing: border-box;
 }
 
 .guestListBtn:hover {

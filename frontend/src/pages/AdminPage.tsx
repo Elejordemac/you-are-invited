@@ -317,6 +317,9 @@ export default function AdminPage() {
         console.error('EmailJS error:', emailErr);
         setWarningMessage(`Guest "${guest.name}" approved, but email failed to send. You can try resending later.`);
       }
+
+      // Refresh the table
+      await loadGuests();
     } catch {
       setErrorMessage('Unable to connect to the server. The server may be waking up — please try again in a few seconds.');
     } finally {
