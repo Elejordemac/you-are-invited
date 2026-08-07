@@ -73,6 +73,16 @@ export default function GuestListView({ guests, counts }: GuestListViewProps) {
 
   return (
     <div className={styles.container}>
+      {/* Floating chibi Avengers */}
+      <div className={styles.chibiFloat} aria-hidden="true">
+        <span className={styles.chibi1}>🦸</span>
+        <span className={styles.chibi2}>🛡️</span>
+        <span className={styles.chibi3}>🕷️</span>
+        <span className={styles.chibi4}>⚡</span>
+        <span className={styles.chibi5}>🔨</span>
+        <span className={styles.chibi6}>🏹</span>
+      </div>
+
       <button
         className={styles.backBtn}
         onClick={() => navigate('/')}
@@ -83,7 +93,11 @@ export default function GuestListView({ guests, counts }: GuestListViewProps) {
 
       <div className={styles.header}>
         <HeaderDecorations />
+        <div className={styles.heroIcons} aria-hidden="true">
+          <span>🛡️</span><span>⚡</span><span>🕷️</span><span>🔨</span><span>🏹</span>
+        </div>
         <h2 className={styles.title}>Guest List</h2>
+        <p className={styles.subtitle}>Earth's Mightiest Guests</p>
         <div className={styles.countsBar}>
           <span className={styles.countItem}>
             Attending: <span className={styles.countValue}>{counts.attending}</span>

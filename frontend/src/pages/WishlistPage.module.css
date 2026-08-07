@@ -59,6 +59,40 @@
 .bgBubble4 { width: 8px; height: 8px; left: 90%; bottom: 10%; animation-duration: 7s; animation-delay: -2s; }
 .bgBubble5 { width: 16px; height: 16px; left: 50%; bottom: 2%; animation-duration: 12s; animation-delay: -7s; }
 
+/* Floating baby boy decorations */
+@keyframes floatDecor {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.12; }
+  50% { transform: translateY(-15px) rotate(8deg); opacity: 0.2; }
+}
+
+@keyframes floatDecor2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.1; }
+  50% { transform: translateY(-10px) rotate(-5deg); opacity: 0.18; }
+}
+
+.floatingDecor {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floatingDecor span {
+  position: absolute;
+  font-size: 2.5rem;
+  opacity: 0.12;
+}
+
+.decor1 { top: 8%; left: 5%; animation: floatDecor 5s ease-in-out infinite; }
+.decor2 { top: 15%; right: 6%; animation: floatDecor2 6s ease-in-out infinite; animation-delay: -1s; }
+.decor3 { top: 35%; left: 4%; animation: floatDecor 7s ease-in-out infinite; animation-delay: -2s; }
+.decor4 { top: 45%; right: 4%; animation: floatDecor2 5.5s ease-in-out infinite; animation-delay: -3s; }
+.decor5 { top: 60%; left: 7%; animation: floatDecor 4.5s ease-in-out infinite; animation-delay: -1.5s; }
+.decor6 { top: 70%; right: 8%; animation: floatDecor2 6.5s ease-in-out infinite; animation-delay: -4s; }
+.decor7 { top: 82%; left: 3%; animation: floatDecor 5s ease-in-out infinite; animation-delay: -2.5s; }
+.decor8 { top: 90%; right: 5%; animation: floatDecor2 5.5s ease-in-out infinite; animation-delay: -3.5s; }
+
 .content {
   max-width: 800px;
   margin: 0 auto;

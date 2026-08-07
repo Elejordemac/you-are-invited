@@ -55,6 +55,18 @@ export default function WishlistPage() {
       <div className={`${styles.bgBubble} ${styles.bgBubble4}`} aria-hidden="true" />
       <div className={`${styles.bgBubble} ${styles.bgBubble5}`} aria-hidden="true" />
 
+      {/* Floating baby boy decorations */}
+      <div className={styles.floatingDecor} aria-hidden="true">
+        <span className={styles.decor1}>🧸</span>
+        <span className={styles.decor2}>🍼</span>
+        <span className={styles.decor3}>👶</span>
+        <span className={styles.decor4}>🧦</span>
+        <span className={styles.decor5}>⭐</span>
+        <span className={styles.decor6}>🎀</span>
+        <span className={styles.decor7}>🧷</span>
+        <span className={styles.decor8}>🌙</span>
+      </div>
+
       <button
         className={styles.backBtn}
         onClick={() => navigate('/')}
