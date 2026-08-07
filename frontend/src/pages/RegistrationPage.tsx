@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import RegistrationForm, { RegistrationData } from '../components/RegistrationForm';
 import { registerGuest } from '../api';
 
@@ -13,6 +14,7 @@ interface ServerFieldError {
 }
 
 export default function RegistrationPage() {
+  const navigate = useNavigate();
   const [submissionState, setSubmissionState] = useState<SubmissionState>({ status: 'idle' });
   const [serverErrors, setServerErrors] = useState<ServerFieldError[]>([]);
 
@@ -83,6 +85,25 @@ export default function RegistrationPage() {
           <p style={{ color: '#b3e5fc', fontSize: '1rem', lineHeight: 1.6 }}>
             {submissionState.message}
           </p>
+          <button
+            onClick={() => navigate('/wishlist')}
+            style={{
+              marginTop: '1.5rem',
+              padding: '0.7rem 2rem',
+              background: 'transparent',
+              border: '2px solid rgba(255, 213, 79, 0.6)',
+              borderRadius: '6px',
+              color: '#ffd54f',
+              fontSize: '0.85rem',
+              fontWeight: 700,
+              letterSpacing: '2px',
+              cursor: 'pointer',
+              fontFamily: "'Bebas Neue', 'Anton', sans-serif",
+              transition: 'all 0.3s ease',
+            }}
+          >
+            🎁 VIEW GIFT IDEAS
+          </button>
         </div>
       </div>
     );
