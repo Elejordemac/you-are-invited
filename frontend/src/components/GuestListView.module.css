@@ -1,0 +1,139 @@
+/* GuestListView - Blue Baby Boy Theme */
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1565c0;
+  margin: 0 0 1rem 0;
+}
+
+.countsBar {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-radius: 12px;
+  border: 2px solid #64b5f6;
+}
+
+.countItem {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1565c0;
+}
+
+.countValue {
+  font-weight: 700;
+}
+
+.separator {
+  color: #90caf9;
+  font-weight: 300;
+}
+
+.tableWrapper {
+  background: #ffffff;
+  border: 2px solid #90caf9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(21, 101, 192, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: linear-gradient(90deg, #1565c0 0%, #1e88e5 50%, #42a5f5 100%);
+  color: #ffffff;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e3f2fd;
+  color: #1a1a2e;
+  font-size: 0.9rem;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover td {
+  background: #e3f2fd;
+}
+
+/* Status badges */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badgeAttending {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badgeNotAttending {
+  background: #fce4ec;
+  color: #c62828;
+}
+
+.badgeUndecided {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.badgeApproved {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badgePending {
+  background: #fff8e1;
+  color: #f57f17;
+}
+
+/* Empty state */
+.emptyState {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #ffffff;
+  border: 2px solid #90caf9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(21, 101, 192, 0.1);
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.emptyMessage {
+  font-size: 1.1rem;
+  color: #455a64;
+  margin: 0;
+}

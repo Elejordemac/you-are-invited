@@ -1,0 +1,57 @@
+/* Navigation Bar - Blue gradient header with white text */
+.app-nav {
+  background: var(--gradient-header);
+  box-shadow: 0 2px 12px rgba(21, 101, 192, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.app-nav-brand {
+  color: var(--color-white);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.app-nav-links {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--font-size-md);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-link.active {
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+/* Main content area */
+.app-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+}

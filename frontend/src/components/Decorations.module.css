@@ -1,0 +1,117 @@
+/* Baby Shower Decorative Elements - Animations */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes gentleRotate {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  25% {
+    transform: rotate(3deg) translateX(2px);
+  }
+  75% {
+    transform: rotate(-3deg) translateX(-2px);
+  }
+}
+
+/* Decoration wrapper for header area */
+.headerDecorations {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Individual icon containers */
+.babyBottle {
+  animation: float 3s ease-in-out infinite;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pacifier {
+  animation: gentleRotate 4s ease-in-out infinite;
+  display: inline-flex;
+  align-items: center;
+}
+
+.footprints {
+  animation: floatReverse 3.5s ease-in-out infinite;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sparkle {
+  animation: twinkle 2s ease-in-out infinite;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sparkleDelayed {
+  animation: twinkle 2s ease-in-out infinite;
+  animation-delay: 0.7s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sparkleDelayed2 {
+  animation: twinkle 2s ease-in-out infinite;
+  animation-delay: 1.4s;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Corner decoration container for guest list */
+.cornerDecoration {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  opacity: 0.35;
+  animation: sway 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Inline decoration pair for titles */
+.titleDecoration {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  vertical-align: middle;
+}
