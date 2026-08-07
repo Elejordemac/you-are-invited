@@ -97,10 +97,20 @@
 /* Global Theme Styles */
 .theme-root {
   font-family: var(--font-family);
-  color: var(--color-text-dark);
+  color: #e3f2fd;
   background: #000d1a;
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Reset body/html */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000d1a;
   overflow-x: hidden;
 }
 
