@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import { GuestRecord } from '../types';
 
 export interface EmailResult {
@@ -7,29 +7,9 @@ export interface EmailResult {
   skipped?: boolean;
 }
 
-/**
- * Gmail SMTP transporter using App Password.
- * 
- * Required env vars:
- *   GMAIL_USER - your Gmail address (e.g. greatglorious2@gmail.com)
- *   GMAIL_APP_PASSWORD - a Gmail App Password (NOT your regular password)
- * 
- * To get an App Password:
- *   1. Go to https://myaccount.google.com/security
- *   2. Enable 2-Step Verification if not already enabled
- *   3. Go to https://myaccount.google.com/apppasswords
- *   4. Create an App Password for "Mail" → "Other" (name it "Baby Shower App")
- *   5. Copy the 16-character password and set it as GMAIL_APP_PASSWORD on Render
- */
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_ADDRESS = process.env.GMAIL_USER || 'greatglorious2@gmail.com';
+const FROM_ADDRESS = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
 
 /**
  * Sends an approval email to a guest notifying them that their registration
@@ -42,15 +22,6 @@ export async function sendApprovalEmail(guest: GuestRecord): Promise<EmailResult
   // Deduplication: do not send if email was already sent for this guest
   if (guest.approvalEmailSent) {
     return { success: true, skipped: true };
-  }
-
-  // Check if Gmail credentials are configured
-  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
-    console.error('Gmail credentials not configured. Set GMAIL_USER and GMAIL_APP_PASSWORD env vars.');
-    return {
-      success: false,
-      error: 'Email service not configured',
-    };
   }
 
   const subject = "Baby Shower - Your Registration Has Been Approved!";
@@ -84,17 +55,16 @@ export async function sendApprovalEmail(guest: GuestRecord): Promise<EmailResult
   `;
 
   try {
-    await transporter.sendMail({
-      from: `"Baby Shower" <${FROM_ADDRESS}>`,
+    await resend.emails.send({
+      from: FROM_ADDRESS,
       to: guest.email,
       subject,
       html,
     });
 
-    console.log(`Approval email sent to ${guest.email}`);
     return { success: true };
   } catch (error: any) {
-    console.error('Failed to send approval email:', error.message || error);
+    console.error('Failed to send approval email:', error);
     return {
       success: false,
       error: error.message || 'Failed to send email',
