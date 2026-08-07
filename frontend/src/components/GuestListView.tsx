@@ -119,19 +119,19 @@ export default function GuestListView({ guests, counts }: GuestListViewProps) {
             <tbody>
               {guests.map((guest) => (
                 <tr key={guest.id}>
-                  <td>{guest.name}</td>
-                  <td>{guest.email}</td>
-                  <td>
+                  <td data-label="Name">{guest.name}</td>
+                  <td data-label="Email">{guest.email}</td>
+                  <td data-label="RSVP">
                     <span className={`${styles.badge} ${getRsvpBadgeClass(guest.rsvpStatus)}`}>
                       {guest.rsvpStatus}
                     </span>
                   </td>
-                  <td>
+                  <td data-label="Approval">
                     <span className={`${styles.badge} ${getApprovalBadgeClass(guest.approvalStatus)}`}>
                       {guest.approvalStatus}
                     </span>
                   </td>
-                  <td>{formatTimestamp(guest.submittedAt)}</td>
+                  <td data-label="Registered">{formatTimestamp(guest.submittedAt)}</td>
                 </tr>
               ))}
             </tbody>
