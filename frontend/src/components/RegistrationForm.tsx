@@ -307,11 +307,17 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
                 min={0}
                 max={5}
                 className={styles.input}
-                value={companions}
+                value={companions === 0 ? '' : companions}
                 onChange={(e) => {
-                  const val = Math.max(0, Math.min(5, parseInt(e.target.value) || 0));
+                  const raw = e.target.value;
+                  if (raw === '') {
+                    setCompanions(0);
+                    return;
+                  }
+                  const val = Math.max(0, Math.min(5, parseInt(raw) || 0));
                   setCompanions(val);
                 }}
+                placeholder="0"
               />
             </div>
 

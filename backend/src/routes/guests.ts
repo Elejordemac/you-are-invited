@@ -57,9 +57,11 @@ router.post('/', async (req: Request, res: Response) => {
     }
 
     const { name, email, rsvpStatus } = req.body as RegisterGuestRequest;
+    const companions = parseInt(req.body.companions) || 0;
+    const dietaryRestrictions = req.body.dietaryRestrictions || '';
 
     // Register or update guest
-    const { guest, isUpdate } = await registerGuest(name, email, rsvpStatus);
+    const { guest, isUpdate } = await registerGuest(name, email, rsvpStatus, companions, dietaryRestrictions);
 
     const statusCode = isUpdate ? 200 : 201;
     const message = isUpdate

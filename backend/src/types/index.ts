@@ -20,6 +20,8 @@ export interface GuestRecord {
   rsvpStatus: RsvpStatus;
   approvalStatus: ApprovalStatus;
   approvalEmailSent: boolean; // tracks whether approval email was sent
+  companions: number;         // 0-5 number of companions
+  dietaryRestrictions: string; // optional, max 200 chars
   submittedAt: Date;          // UTC timestamp, second precision
   updatedAt: Date;            // UTC timestamp of last update
 }

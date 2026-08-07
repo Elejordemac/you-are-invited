@@ -43,6 +43,8 @@ router.get('/', async (req: Request, res: Response) => {
         rsvpStatus: guest.rsvpStatus,
         approvalStatus: guest.approvalStatus,
         approvalEmailSent: guest.approvalEmailSent,
+        companions: guest.companions,
+        dietaryRestrictions: guest.dietaryRestrictions,
         submittedAt: guest.submittedAt.toISOString(),
         updatedAt: guest.updatedAt.toISOString(),
       })),

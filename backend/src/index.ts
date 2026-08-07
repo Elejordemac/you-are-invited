@@ -28,6 +28,20 @@ app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
+// Auto-run migration for new columns (safe to run multiple times)
+async function runMigrations() {
+  try {
+    await pool.query(`
+      ALTER TABLE guests ADD COLUMN IF NOT EXISTS companions INTEGER NOT NULL DEFAULT 0;
+      ALTER TABLE guests ADD COLUMN IF NOT EXISTS dietary_restrictions VARCHAR(200) NOT NULL DEFAULT '';
+    `);
+    console.log('Migrations applied successfully');
+  } catch (err) {
+    console.error('Migration error (non-fatal):', err);
+  }
+}
+runMigrations();
+
 // TEMPORARY: Seed admin endpoint - remove after first use
 app.get('/api/seed-admin', async (_req, res) => {
   try {

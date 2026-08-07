@@ -9,6 +9,8 @@ export interface AdminGuest {
   rsvpStatus: 'Attending' | 'Not Attending' | 'Undecided';
   approvalStatus: 'Pending' | 'Approved';
   approvalEmailSent: boolean;
+  companions: number;
+  dietaryRestrictions: string;
   submittedAt: string;
   updatedAt: string;
 }
@@ -188,6 +190,8 @@ export default function AdminPanel({ token, guests: propGuests, counts: propCoun
                 <th>Name</th>
                 <th>Email</th>
                 <th>RSVP Status</th>
+                <th>Companions</th>
+                <th>Dietary</th>
                 <th>Approval Status</th>
                 <th>Registered At</th>
                 <th>Actions</th>
@@ -203,6 +207,8 @@ export default function AdminPanel({ token, guests: propGuests, counts: propCoun
                       {guest.rsvpStatus}
                     </span>
                   </td>
+                  <td data-label="Companions">{guest.companions || 0}</td>
+                  <td data-label="Dietary">{guest.dietaryRestrictions || '—'}</td>
                   <td data-label="Approval">
                     <span className={`${styles.badge} ${getApprovalBadgeClass(guest.approvalStatus)}`}>
                       {guest.approvalStatus}

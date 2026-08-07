@@ -14,10 +14,14 @@ export interface RegisterGuestResult {
 export async function registerGuest(
   name: string,
   email: string,
-  rsvpStatus: RsvpStatus
+  rsvpStatus: RsvpStatus,
+  companions: number = 0,
+  dietaryRestrictions: string = ''
 ): Promise<RegisterGuestResult> {
   const normalizedEmail = normalizeEmail(email);
   const trimmedName = name.trim();
+  const trimmedDietary = dietaryRestrictions.trim().slice(0, 200);
+  const safeCompanions = Math.max(0, Math.min(5, companions || 0));
   const now = new Date();
   // Truncate to second precision
   now.setMilliseconds(0);
@@ -39,10 +43,10 @@ export async function registerGuest(
       // Update existing record
       const updateResult = await client.query(
         `UPDATE guests 
-         SET name = $1, rsvp_status = $2, updated_at = $3 
-         WHERE LOWER(TRIM(email)) = $4 
+         SET name = $1, rsvp_status = $2, companions = $3, dietary_restrictions = $4, updated_at = $5 
+         WHERE LOWER(TRIM(email)) = $6 
          RETURNING *`,
-        [trimmedName, rsvpStatus, now, normalizedEmail]
+        [trimmedName, rsvpStatus, safeCompanions, trimmedDietary, now, normalizedEmail]
       );
 
       const row = updateResult.rows[0];
@@ -51,10 +55,10 @@ export async function registerGuest(
     } else {
       // Insert new record
       const insertResult = await client.query(
-        `INSERT INTO guests (name, email, rsvp_status, approval_status, approval_email_sent, submitted_at, updated_at)
-         VALUES ($1, $2, $3, 'Pending', false, $4, $4)
+        `INSERT INTO guests (name, email, rsvp_status, approval_status, approval_email_sent, companions, dietary_restrictions, submitted_at, updated_at)
+         VALUES ($1, $2, $3, 'Pending', false, $4, $5, $6, $6)
          RETURNING *`,
-        [trimmedName, normalizedEmail, rsvpStatus, now]
+        [trimmedName, normalizedEmail, rsvpStatus, safeCompanions, trimmedDietary, now]
       );
 
       const row = insertResult.rows[0];
@@ -92,7 +96,9 @@ export async function getAllGuests(): Promise<GuestListResult> {
 
   const guests = result.rows.map(mapRowToGuestRecord);
 
-  const attending = guests.filter(g => g.rsvpStatus === 'Attending').length;
+  // Count attending guests + their companions
+  const attendingGuests = guests.filter(g => g.rsvpStatus === 'Attending');
+  const attending = attendingGuests.reduce((sum, g) => sum + 1 + g.companions, 0);
   const notAttending = guests.filter(g => g.rsvpStatus === 'Not Attending').length;
 
   return {
@@ -100,7 +106,7 @@ export async function getAllGuests(): Promise<GuestListResult> {
     counts: {
       attending,
       notAttending,
-      total: guests.length,
+      total: guests.reduce((sum, g) => sum + 1 + g.companions, 0),
     },
   };
 }
@@ -141,7 +147,8 @@ export async function getAdminGuests(filter?: AdminGuestsFilter): Promise<GuestL
   const result = await pool.query(query, params);
   const guests = result.rows.map(mapRowToGuestRecord);
 
-  const attending = guests.filter(g => g.rsvpStatus === 'Attending').length;
+  const attendingGuests = guests.filter(g => g.rsvpStatus === 'Attending');
+  const attending = attendingGuests.reduce((sum, g) => sum + 1 + g.companions, 0);
   const notAttending = guests.filter(g => g.rsvpStatus === 'Not Attending').length;
 
   return {
@@ -149,7 +156,7 @@ export async function getAdminGuests(filter?: AdminGuestsFilter): Promise<GuestL
     counts: {
       attending,
       notAttending,
-      total: guests.length,
+      total: guests.reduce((sum, g) => sum + 1 + g.companions, 0),
     },
   };
 }
@@ -300,6 +307,8 @@ function mapRowToGuestRecord(row: any): GuestRecord {
     rsvpStatus: row.rsvp_status,
     approvalStatus: row.approval_status,
     approvalEmailSent: row.approval_email_sent,
+    companions: row.companions || 0,
+    dietaryRestrictions: row.dietary_restrictions || '',
     submittedAt: new Date(row.submitted_at),
     updatedAt: new Date(row.updated_at),
   };
