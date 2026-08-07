@@ -53,5 +53,5 @@
 .app-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-lg);
+  padding: 0.5rem var(--spacing-md);
 }
