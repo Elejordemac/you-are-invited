@@ -36,15 +36,17 @@
 
 /* === SLIDE BASE === */
 .slide {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
-  overflow-y: auto;
   overflow-x: hidden;
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 200;
   font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+  overflow-y: auto;
 }
 
 /* === SCREEN 1: INVITATION === */
@@ -355,13 +357,14 @@
 /* === SCREEN 2: RSVP FORM === */
 .rsvpContainer {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%);
   position: relative;
-  overflow-y: auto;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
 }
 
 .backBtn {
