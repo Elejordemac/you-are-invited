@@ -304,3 +304,23 @@ function mapRowToGuestRecord(row: any): GuestRecord {
     updatedAt: new Date(row.updated_at),
   };
 }
+
+/**
+ * Retrieves a single guest record by ID.
+ * Returns null if not found.
+ */
+export async function getGuestById(id: string): Promise<GuestRecord | null> {
+  const result = await pool.query('SELECT * FROM guests WHERE id = $1', [id]);
+  if (result.rows.length === 0) return null;
+  return mapRowToGuestRecord(result.rows[0]);
+}
+
+/**
+ * Resets the approval_email_sent flag so the email can be resent.
+ */
+export async function resetEmailSent(id: string): Promise<void> {
+  await pool.query(
+    'UPDATE guests SET approval_email_sent = false WHERE id = $1',
+    [id]
+  );
+}

@@ -31,6 +31,7 @@ interface AdminPanelProps {
   onEdit?: (guest: AdminGuest) => void;
   onDelete?: (guest: AdminGuest) => void;
   onApprove?: (guest: AdminGuest) => void;
+  approvingId?: string | null;
 }
 
 /**
@@ -84,7 +85,7 @@ function getApprovalBadgeClass(status: AdminGuest['approvalStatus']): string {
  *
  * Requirements: 6.4, 6.16, 6.17
  */
-export default function AdminPanel({ token, guests: propGuests, counts: propCounts, loading: propLoading, error: propError, onRetry, onEdit, onDelete, onApprove }: AdminPanelProps) {
+export default function AdminPanel({ token, guests: propGuests, counts: propCounts, loading: propLoading, error: propError, onRetry, onEdit, onDelete, onApprove, approvingId }: AdminPanelProps) {
   const [internalGuests, setInternalGuests] = useState<AdminGuest[]>([]);
   const [internalCounts, setInternalCounts] = useState<AdminGuestCounts>({ attending: 0, notAttending: 0, total: 0 });
   const [internalLoading, setInternalLoading] = useState(true);
@@ -220,8 +221,9 @@ export default function AdminPanel({ token, guests: propGuests, counts: propCoun
                           className={styles.btnApprove}
                           onClick={() => onApprove?.(guest)}
                           aria-label={`Approve ${guest.name}`}
+                          disabled={approvingId === guest.id}
                         >
-                          Approve
+                          {approvingId === guest.id ? 'Approving...' : 'Approve'}
                         </button>
                       )}
                       <button

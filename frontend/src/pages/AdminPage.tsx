@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, FormEvent } from 'react';
+import emailjs from '@emailjs/browser';
 import AdminLogin from '../components/AdminLogin';
 import AdminPanel, { AdminGuest } from '../components/AdminPanel';
 import {
@@ -8,6 +9,11 @@ import {
   approveAdminGuest,
 } from '../api';
 import styles from './AdminPage.module.css';
+
+// EmailJS config
+const EMAILJS_SERVICE_ID = 'service_pfqc3iv';
+const EMAILJS_TEMPLATE_ID = 'template_70nkpfb';
+const EMAILJS_PUBLIC_KEY = 'vpDTwVtZMtxoj-JpX';
 
 type RsvpFilter = '' | 'Attending' | 'Not Attending' | 'Undecided';
 
@@ -35,7 +41,9 @@ interface EditFormErrors {
  * Requirements: 6.1-6.17, 7.4
  */
 export default function AdminPage() {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(() => {
+    return sessionStorage.getItem('adminToken');
+  });
   const [statusFilter, setStatusFilter] = useState<RsvpFilter>('');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -58,10 +66,12 @@ export default function AdminPage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   function handleLoginSuccess(newToken: string) {
+    sessionStorage.setItem('adminToken', newToken);
     setToken(newToken);
   }
 
   function handleAuthFailure() {
+    sessionStorage.removeItem('adminToken');
     setToken(null);
   }
 
@@ -265,8 +275,13 @@ export default function AdminPage() {
 
   // --- Approve functionality ---
 
+  const [approvingId, setApprovingId] = useState<string | null>(null);
+
   async function handleApproveClick(guest: AdminGuest) {
     if (!token) return;
+
+    setApprovingId(guest.id);
+    setErrorMessage('');
 
     try {
       const response = await approveAdminGuest(token, guest.id);
@@ -282,23 +297,30 @@ export default function AdminPage() {
         return;
       }
 
-      const body = await response.json();
-
-      // Check if email was sent successfully
-      if (body.emailSent === false && body.emailWarning) {
-        setWarningMessage(body.emailWarning);
-      } else {
-        setSuccessMessage(`Guest "${guest.name}" has been approved.`);
-      }
-
-      // Update local state
+      // Update local state immediately
       setGuests((prev) =>
         prev.map((g) =>
           g.id === guest.id ? { ...g, approvalStatus: 'Approved' as const } : g
         )
       );
+
+      // Send email via EmailJS
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          to_email: guest.email,
+          guest_name: guest.name,
+          rsvp_status: guest.rsvpStatus,
+        }, EMAILJS_PUBLIC_KEY);
+
+        setSuccessMessage(`Guest "${guest.name}" approved. Email sent to ${guest.email}!`);
+      } catch (emailErr) {
+        console.error('EmailJS error:', emailErr);
+        setWarningMessage(`Guest "${guest.name}" approved, but email failed to send. You can try resending later.`);
+      }
     } catch {
-      setErrorMessage('Unable to connect to the server. Please try again.');
+      setErrorMessage('Unable to connect to the server. The server may be waking up — please try again in a few seconds.');
+    } finally {
+      setApprovingId(null);
     }
   }
 
@@ -312,7 +334,7 @@ export default function AdminPage() {
     <div className={styles.pageContainer}>
       <div className={styles.topBar}>
         <h1 className={styles.pageTitle}>Admin Panel</h1>
-        <button className={styles.logoutBtn} onClick={() => setToken(null)}>
+        <button className={styles.logoutBtn} onClick={() => { sessionStorage.removeItem('adminToken'); setToken(null); }}>
           Log Out
         </button>
       </div>
@@ -372,6 +394,7 @@ export default function AdminPage() {
         onEdit={handleEditClick}
         onDelete={handleDeleteClick}
         onApprove={handleApproveClick}
+        approvingId={approvingId}
       />
 
       {/* Edit Modal */}

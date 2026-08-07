@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { getAdminGuests, updateGuest, deleteGuest, approveGuest, markEmailSent } from '../services/guest';
+import { getAdminGuests, updateGuest, deleteGuest, approveGuest, markEmailSent, getGuestById, resetEmailSent } from '../services/guest';
 import { requireAuth } from '../middleware/auth';
 import { RSVP_STATUSES, ApproveResponse } from '../types';
 import { validateRegistration } from '../services/validation';
