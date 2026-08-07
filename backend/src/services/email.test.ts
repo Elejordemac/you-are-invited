@@ -26,6 +26,8 @@ describe('sendApprovalEmail', () => {
     rsvpStatus: 'Attending',
     approvalStatus: 'Approved',
     approvalEmailSent: false,
+    companions: 0,
+    dietaryRestrictions: '',
     submittedAt: new Date(),
     updatedAt: new Date(),
   };
