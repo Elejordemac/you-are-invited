@@ -1,4 +1,4 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { GuestRecord } from '../types';
 
 export interface EmailResult {
@@ -7,9 +7,22 @@ export interface EmailResult {
   skipped?: boolean;
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+/**
+ * Gmail SMTP transporter using App Password.
+ * 
+ * Required env vars:
+ *   GMAIL_USER - your Gmail address (e.g. greatglorious2@gmail.com)
+ *   GMAIL_APP_PASSWORD - a Gmail App Password (NOT your regular password)
+ */
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
 
-const FROM_ADDRESS = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+const FROM_ADDRESS = process.env.GMAIL_USER || 'greatglorious2@gmail.com';
 
 /**
  * Sends an approval email to a guest notifying them that their registration
@@ -22,6 +35,15 @@ export async function sendApprovalEmail(guest: GuestRecord): Promise<EmailResult
   // Deduplication: do not send if email was already sent for this guest
   if (guest.approvalEmailSent) {
     return { success: true, skipped: true };
+  }
+
+  // Check if Gmail credentials are configured
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    console.error('Gmail credentials not configured. Set GMAIL_USER and GMAIL_APP_PASSWORD env vars.');
+    return {
+      success: false,
+      error: 'Email service not configured',
+    };
   }
 
   const subject = "Baby Shower - Your Registration Has Been Approved!";
@@ -55,16 +77,17 @@ export async function sendApprovalEmail(guest: GuestRecord): Promise<EmailResult
   `;
 
   try {
-    await resend.emails.send({
-      from: FROM_ADDRESS,
+    await transporter.sendMail({
+      from: `"Baby Shower" <${FROM_ADDRESS}>`,
       to: guest.email,
       subject,
       html,
     });
 
+    console.log(`Approval email sent to ${guest.email}`);
     return { success: true };
   } catch (error: any) {
-    console.error('Failed to send approval email:', error);
+    console.error('Failed to send approval email:', error.message || error);
     return {
       success: false,
       error: error.message || 'Failed to send email',
