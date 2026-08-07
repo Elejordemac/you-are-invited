@@ -1,4 +1,4 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './theme';
 import RegistrationPage from './pages/RegistrationPage';
 import GuestListPage from './pages/GuestListPage';
@@ -6,26 +6,31 @@ import AdminPage from './pages/AdminPage';
 import './App.css';
 
 function App() {
+  const location = useLocation();
+  const showNav = location.pathname.startsWith('/admin');
+
   return (
     <ThemeProvider>
-      <nav className="app-nav" aria-label="Main navigation">
-        <div className="app-nav-inner">
-          <span className="app-nav-brand">🍼 Baby Shower</span>
-          <div className="app-nav-links">
-            <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} end>
-              Register
-            </NavLink>
-            <NavLink to="/guests" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              Guest List
-            </NavLink>
-            <NavLink to="/admin" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              Admin
-            </NavLink>
+      {showNav && (
+        <nav className="app-nav" aria-label="Main navigation">
+          <div className="app-nav-inner">
+            <span className="app-nav-brand">🍼 Baby Shower</span>
+            <div className="app-nav-links">
+              <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} end>
+                Register
+              </NavLink>
+              <NavLink to="/guests" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                Guest List
+              </NavLink>
+              <NavLink to="/admin" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                Admin
+              </NavLink>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      )}
 
-      <main className="app-content">
+      <main className={showNav ? 'app-content' : ''}>
         <Routes>
           <Route path="/" element={<RegistrationPage />} />
           <Route path="/guests" element={<GuestListPage />} />

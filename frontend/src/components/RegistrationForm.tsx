@@ -1,5 +1,7 @@
 import { useState, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './RegistrationForm.module.css';
+import HealingPod from './HealingPod';
 
 type RsvpStatus = 'Attending' | 'Not Attending' | 'Undecided';
 
@@ -49,6 +51,7 @@ function validateRsvpStatus(status: string): string | undefined {
 }
 
 export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
+  const navigate = useNavigate();
   const [screen, setScreen] = useState<'invite' | 'rsvp'>('invite');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -132,6 +135,18 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
               <span>ASSEMBLE YOUR RSVP</span>
               <span className={styles.btnArrow}>→</span>
             </button>
+
+            <button
+              className={styles.guestListBtn}
+              onClick={() => navigate('/guests')}
+              type="button"
+            >
+              <span>VIEW GUEST LIST</span>
+            </button>
+
+            <div className={styles.healingPodContainer}>
+              <HealingPod />
+            </div>
           </div>
         </div>
       </div>

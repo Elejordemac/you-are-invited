@@ -1,18 +1,49 @@
-/* AdminPage - Blue Baby Boy Theme */
+/* AdminPage - Dark Blue Marvel Theme */
 
 .pageContainer {
-  max-width: 1200px;
-  margin: 0 auto;
+  min-height: 100vh;
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%);
+  color: #e3f2fd;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pageTitle {
   font-size: 2rem;
   font-weight: 700;
-  color: #1565c0;
-  text-align: center;
-  margin: 0 0 2rem 0;
+  color: #42a5f5;
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Logout button */
+.logoutBtn {
+  padding: 0.5rem 1.2rem;
+  border: 2px solid rgba(66, 165, 245, 0.5);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: #90caf9;
+  transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+  background: rgba(66, 165, 245, 0.1);
+  border-color: #42a5f5;
+  color: #e3f2fd;
 }
 
 /* Filter and Search Bar */
@@ -22,33 +53,37 @@
   align-items: center;
   flex-wrap: wrap;
   padding: 1rem 1.5rem;
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  background: rgba(10, 25, 41, 0.8);
   border-radius: 12px;
-  border: 2px solid #64b5f6;
+  border: 2px solid rgba(66, 165, 245, 0.3);
   margin-bottom: 1.5rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .filterLabel {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: #1565c0;
+  color: #90caf9;
+  letter-spacing: 0.5px;
 }
 
 .filterSelect {
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
-  border: 2px solid #90caf9;
+  border: 2px solid #1e3a5f;
   border-radius: 8px;
-  background: #ffffff;
-  color: #212121;
+  background: rgba(10, 25, 41, 0.9);
+  color: #e3f2fd;
   outline: none;
   transition: border-color 0.2s;
   cursor: pointer;
 }
 
 .filterSelect:focus {
-  border-color: #1976d2;
-  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+  border-color: #42a5f5;
+  box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.15);
 }
 
 .searchInput {
@@ -56,58 +91,61 @@
   min-width: 200px;
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
-  border: 2px solid #90caf9;
+  border: 2px solid #1e3a5f;
   border-radius: 8px;
-  background: #ffffff;
-  color: #212121;
+  background: rgba(10, 25, 41, 0.9);
+  color: #e3f2fd;
   outline: none;
   transition: border-color 0.2s;
 }
 
 .searchInput:focus {
-  border-color: #1976d2;
-  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+  border-color: #42a5f5;
+  box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.15);
 }
 
 .searchInput::placeholder {
-  color: #90a4ae;
+  color: #546e7a;
 }
 
-/* Status message / warnings */
+/* Status messages */
 .statusMessage {
   padding: 0.75rem 1rem;
   border-radius: 8px;
   font-size: 0.9rem;
   margin-bottom: 1rem;
   text-align: center;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .successMessage {
-  background: #e8f5e9;
-  border: 1px solid #81c784;
-  color: #2e7d32;
+  background: rgba(76, 175, 80, 0.15);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  color: #81c784;
 }
 
 .warningMessage {
-  background: #fff8e1;
-  border: 1px solid #ffcc02;
-  color: #f57f17;
+  background: rgba(255, 193, 7, 0.15);
+  border: 1px solid rgba(255, 193, 7, 0.4);
+  color: #ffd54f;
 }
 
 .errorBanner {
-  background: #fce4ec;
-  border: 1px solid #ef9a9a;
-  color: #c62828;
+  background: rgba(239, 83, 80, 0.15);
+  border: 1px solid rgba(239, 83, 80, 0.4);
+  color: #ef9a9a;
 }
 
-/* Edit Modal Overlay */
+/* Edit Modal */
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,20 +153,21 @@
 }
 
 .modalContent {
-  background: #ffffff;
-  border: 2px solid #90caf9;
+  background: #0a1929;
+  border: 2px solid rgba(66, 165, 245, 0.4);
   border-radius: 12px;
   padding: 2rem;
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 8px 32px rgba(21, 101, 192, 0.2);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(30, 136, 229, 0.15);
 }
 
 .modalTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #1565c0;
+  color: #42a5f5;
   margin: 0 0 1.5rem 0;
+  letter-spacing: 1px;
 }
 
 .formGroup {
@@ -137,63 +176,67 @@
 
 .formLabel {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #1565c0;
+  color: #90caf9;
   margin-bottom: 0.35rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .formInput {
   width: 100%;
-  padding: 0.6rem 0.75rem;
+  padding: 0.65rem 0.75rem;
   font-size: 0.95rem;
-  border: 2px solid #90caf9;
+  border: 2px solid #1e3a5f;
   border-radius: 8px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   box-sizing: border-box;
-  background: #ffffff;
-  color: #212121;
+  background: rgba(10, 25, 41, 0.9);
+  color: #e3f2fd;
+  font-family: inherit;
 }
 
 .formInput:focus {
-  border-color: #1976d2;
-  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+  border-color: #42a5f5;
+  box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.15);
 }
 
 .formInputError {
-  border-color: #e53935;
+  border-color: #ef5350;
 }
 
 .formSelect {
   width: 100%;
-  padding: 0.6rem 0.75rem;
+  padding: 0.65rem 0.75rem;
   font-size: 0.95rem;
-  border: 2px solid #90caf9;
+  border: 2px solid #1e3a5f;
   border-radius: 8px;
-  background: #ffffff;
-  color: #212121;
+  background: rgba(10, 25, 41, 0.9);
+  color: #e3f2fd;
   outline: none;
   cursor: pointer;
+  font-family: inherit;
 }
 
 .formSelect:focus {
-  border-color: #1976d2;
-  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+  border-color: #42a5f5;
+  box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.15);
 }
 
 .fieldError {
   font-size: 0.8rem;
-  color: #c62828;
+  color: #ef9a9a;
   margin-top: 0.25rem;
 }
 
 .modalError {
-  background: #fce4ec;
-  border: 1px solid #ef9a9a;
+  background: rgba(239, 83, 80, 0.15);
+  border: 1px solid rgba(239, 83, 80, 0.4);
   border-radius: 8px;
   padding: 0.6rem 0.75rem;
-  color: #c62828;
+  color: #ef9a9a;
   font-size: 0.85rem;
   margin-bottom: 1rem;
 }
@@ -207,62 +250,39 @@
 
 .btnSave {
   padding: 0.5rem 1.25rem;
-  border: none;
+  border: 2px solid #42a5f5;
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  background: linear-gradient(135deg, #1976d2, #1565c0);
+  background: linear-gradient(135deg, #1565c0, #0d47a1);
   color: #ffffff;
-  transition: background 0.2s, opacity 0.2s;
+  transition: all 0.2s;
 }
 
 .btnSave:hover:not(:disabled) {
-  background: linear-gradient(135deg, #1565c0, #0d47a1);
+  box-shadow: 0 0 15px rgba(30, 136, 229, 0.4);
+  transform: translateY(-1px);
 }
 
 .btnSave:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
 .btnCancel {
   padding: 0.5rem 1.25rem;
-  border: 2px solid #90caf9;
+  border: 2px solid rgba(66, 165, 245, 0.4);
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  background: #ffffff;
-  color: #1565c0;
-  transition: background 0.2s, border-color 0.2s;
+  background: transparent;
+  color: #90caf9;
+  transition: all 0.2s;
 }
 
 .btnCancel:hover {
-  background: #e3f2fd;
-  border-color: #1976d2;
-}
-
-/* Logout button */
-.logoutBtn {
-  padding: 0.4rem 1rem;
-  border: 2px solid #90caf9;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  background: #ffffff;
-  color: #1565c0;
-  transition: background 0.2s;
-}
-
-.logoutBtn:hover {
-  background: #e3f2fd;
-}
-
-.topBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
+  background: rgba(66, 165, 245, 0.1);
+  border-color: #42a5f5;
 }

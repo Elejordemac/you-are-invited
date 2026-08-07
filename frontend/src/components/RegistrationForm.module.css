@@ -219,6 +219,37 @@
   transform: translateX(4px);
 }
 
+/* Guest List Button */
+.guestListBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.8rem;
+  background: transparent;
+  border: 2px solid rgba(66, 165, 245, 0.5);
+  border-radius: 6px;
+  color: #90caf9;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.guestListBtn:hover {
+  background: rgba(66, 165, 245, 0.1);
+  border-color: #42a5f5;
+  color: #e3f2fd;
+}
+
+/* Healing Pod on invitation */
+.healingPodContainer {
+  margin-top: 2rem;
+  opacity: 0.85;
+  animation: fadeInUp 1.5s ease-out 0.5s both;
+}
+
 /* === SCREEN 2: RSVP FORM === */
 .rsvpContainer {
   width: 100%;

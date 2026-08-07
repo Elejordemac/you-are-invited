@@ -75,17 +75,32 @@ export default function GuestListPage() {
 
   if (state.status === 'loading') {
     return (
-      <div className="loading-container" role="status" aria-live="polite">
-        <p>Loading guest list...</p>
+      <div style={{
+        minHeight: '100vh',
+        background: 'radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+        <p style={{ color: '#90caf9', fontSize: '1.1rem' }} role="status" aria-live="polite">Loading guest list...</p>
       </div>
     );
   }
 
   if (state.status === 'error') {
     return (
-      <div className="error-container" role="alert" aria-live="polite">
-        <p>{state.message}</p>
-        <button onClick={() => { setState({ status: 'loading' }); loadGuests(false); }}>
+      <div style={{
+        minHeight: '100vh',
+        background: 'radial-gradient(ellipse at center, #0a1929 0%, #001e3c 40%, #000d1a 100%)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '1rem',
+      }}>
+        <p style={{ color: '#ef9a9a', fontSize: '1rem' }} role="alert" aria-live="polite">{state.message}</p>
+        <button
+          onClick={() => { setState({ status: 'loading' }); loadGuests(false); }}
+          style={{
+            padding: '0.5rem 1.5rem', border: '2px solid #42a5f5', borderRadius: '8px',
+            background: 'linear-gradient(135deg, #1565c0, #0d47a1)', color: '#fff',
+            fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem',
+          }}
+        >
           Retry
         </button>
       </div>
