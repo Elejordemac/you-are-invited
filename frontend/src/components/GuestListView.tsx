@@ -8,6 +8,7 @@ export interface Guest {
   email: string;
   rsvpStatus: 'Attending' | 'Not Attending' | 'Undecided';
   approvalStatus: 'Pending' | 'Approved';
+  companions: number;
   submittedAt: string; // ISO 8601 UTC
 }
 
@@ -126,6 +127,7 @@ export default function GuestListView({ guests, counts }: GuestListViewProps) {
                 <th>Name</th>
                 <th>Email</th>
                 <th>RSVP Status</th>
+                <th>Companions</th>
                 <th>Approval Status</th>
                 <th>Registered At</th>
               </tr>
@@ -140,6 +142,7 @@ export default function GuestListView({ guests, counts }: GuestListViewProps) {
                       {guest.rsvpStatus}
                     </span>
                   </td>
+                  <td data-label="Companions">{guest.companions > 0 ? `+${guest.companions}` : '—'}</td>
                   <td data-label="Approval">
                     <span className={`${styles.badge} ${getApprovalBadgeClass(guest.approvalStatus)}`}>
                       {guest.approvalStatus}

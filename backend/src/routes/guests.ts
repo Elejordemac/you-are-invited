@@ -20,6 +20,7 @@ router.get('/', async (req: Request, res: Response) => {
         email: guest.email,
         rsvpStatus: guest.rsvpStatus,
         approvalStatus: guest.approvalStatus,
+        companions: guest.companions,
         submittedAt: guest.submittedAt.toISOString(),
         updatedAt: guest.updatedAt.toISOString(),
       })),

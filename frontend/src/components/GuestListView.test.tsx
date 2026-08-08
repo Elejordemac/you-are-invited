@@ -9,6 +9,7 @@ const mockGuests: Guest[] = [
     email: 'alice@example.com',
     rsvpStatus: 'Attending',
     approvalStatus: 'Approved',
+    companions: 2,
     submittedAt: '2025-01-15T10:30:00Z',
   },
   {
@@ -17,6 +18,7 @@ const mockGuests: Guest[] = [
     email: 'bob@example.com',
     rsvpStatus: 'Not Attending',
     approvalStatus: 'Pending',
+    companions: 0,
     submittedAt: '2025-01-14T08:00:00Z',
   },
   {
@@ -25,6 +27,7 @@ const mockGuests: Guest[] = [
     email: 'carol@example.com',
     rsvpStatus: 'Undecided',
     approvalStatus: 'Pending',
+    companions: 1,
     submittedAt: '2025-01-13T15:45:00Z',
   },
 ];
@@ -129,6 +132,7 @@ describe('GuestListView', () => {
           email: 'newest@example.com',
           rsvpStatus: 'Attending',
           approvalStatus: 'Pending',
+          companions: 0,
           submittedAt: '2025-02-01T12:00:00Z',
         },
         {
@@ -137,6 +141,7 @@ describe('GuestListView', () => {
           email: 'oldest@example.com',
           rsvpStatus: 'Not Attending',
           approvalStatus: 'Approved',
+          companions: 3,
           submittedAt: '2025-01-01T12:00:00Z',
         },
       ];
