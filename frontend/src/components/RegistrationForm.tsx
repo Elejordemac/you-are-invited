@@ -178,7 +178,7 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
               </div>
               <div className={styles.infoRow}>
                 <span className={styles.infoIcon}>🗺️</span>
-                <a href="https://maps.app.goo.gl/wWNuKUMiy7fU1UqX6" target="_blank" rel="noopener noreferrer" className={styles.infoLink}>View on Google Maps</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Lot+2+Blk+209+Viscara+Street+New+Lower+Bicutan+Taguig+City" target="_blank" rel="noopener noreferrer" className={styles.infoLink}>View on Google Maps</a>
               </div>
               <div className={styles.infoRow}>
                 <span className={styles.infoIcon}>📞</span>
