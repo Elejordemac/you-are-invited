@@ -80,6 +80,10 @@ export default function WishlistPage() {
           <div className={styles.badge}>BABY ELEJORDE'S</div>
           <h1 className={styles.title}>WISHLIST</h1>
           <p className={styles.subtitle}>Gift Ideas</p>
+          <div className={styles.genderReveal}>
+            <span className={styles.genderIcon}>👶🏻</span>
+            <span className={styles.genderText}>It's a Boy! 💙</span>
+          </div>
         </div>
 
         <div className={styles.messageCard}>

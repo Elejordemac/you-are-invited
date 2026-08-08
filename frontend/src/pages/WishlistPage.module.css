@@ -144,6 +144,31 @@
   font-family: 'Rajdhani', sans-serif;
 }
 
+.genderReveal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  background: rgba(30, 136, 229, 0.15);
+  border: 1px solid rgba(66, 165, 245, 0.4);
+  border-radius: 30px;
+  display: inline-flex;
+}
+
+.genderIcon {
+  font-size: 1.5rem;
+}
+
+.genderText {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #90caf9;
+  letter-spacing: 1.5px;
+  font-family: 'Rajdhani', sans-serif;
+}
+
 /* Message card */
 .messageCard {
   text-align: center;
