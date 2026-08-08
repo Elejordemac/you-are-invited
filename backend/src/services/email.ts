@@ -49,30 +49,64 @@ export async function sendApprovalEmail(guest: GuestRecord): Promise<EmailResult
   const subject = "Baby Shower - Your Registration Has Been Approved!";
 
   const html = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-      <h1 style="color: #1e88e5;">Baby Shower</h1>
-      <p>Dear <strong>${escapeHtml(guest.name)}</strong>,</p>
-      <p>
-        Great news! Your registration for the Baby Shower has been recognized and approved.
-      </p>
-      <h2 style="color: #1565c0;">Your RSVP Details</h2>
-      <ul>
-        <li><strong>Name:</strong> ${escapeHtml(guest.name)}</li>
-        <li><strong>RSVP Status:</strong> ${escapeHtml(guest.rsvpStatus)}</li>
-      </ul>
-      <h2 style="color: #1565c0;">Event Details</h2>
-      <ul>
-        <li><strong>Event:</strong> Mark Rhey Elejorde &amp; Rochelle Ann Reyos&#39;s Baby Shower</li>
-        <li><strong>Date:</strong> September 26 at 3:00 PM</li>
-        <li><strong>Location:</strong> Lot 2 Blk 209 Viscara Street, New Lower Bicutan, Taguig City</li>
-      </ul>
-      <p>
-        We look forward to celebrating with you!
-      </p>
-      <hr style="border: none; border-top: 1px solid #bbdefb; margin: 20px 0;" />
-      <p style="color: #666; font-size: 12px;">
-        This is an automated confirmation email for the Baby Shower guest registration.
-      </p>
+    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0a1929; color: #e3f2fd; padding: 0; border-radius: 12px; overflow: hidden;">
+      <!-- Header -->
+      <div style="background: linear-gradient(135deg, #1565c0, #0d47a1); padding: 24px 30px; text-align: center;">
+        <h1 style="margin: 0; color: #ffffff; font-size: 24px; letter-spacing: 2px;">🍼 BABY SHOWER</h1>
+        <p style="margin: 8px 0 0; color: #90caf9; font-size: 14px;">Mark Rhey Elejorde &amp; Rochelle Ann Reyos</p>
+      </div>
+
+      <!-- Body -->
+      <div style="padding: 30px;">
+        <p style="color: #e3f2fd; font-size: 16px; margin: 0 0 20px;">
+          Dear <strong style="color: #42a5f5;">${escapeHtml(guest.name)}</strong>,
+        </p>
+
+        <!-- Approval badge -->
+        <div style="background: rgba(66, 165, 245, 0.1); border: 1px solid rgba(66, 165, 245, 0.3); border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 24px;">
+          <p style="margin: 0; color: #4caf50; font-size: 18px; font-weight: 700;">✓ REGISTRATION APPROVED</p>
+          <p style="margin: 8px 0 0; color: #b3e5fc; font-size: 14px;">Your RSVP has been recognized and confirmed!</p>
+        </div>
+
+        <!-- RSVP Details -->
+        <h2 style="color: #42a5f5; font-size: 16px; letter-spacing: 1px; margin: 0 0 12px; text-transform: uppercase;">YOUR RSVP DETAILS</h2>
+        <table style="width: 100%; margin-bottom: 24px; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 8px 0; color: #90caf9; font-size: 14px; width: 120px;">Name:</td>
+            <td style="padding: 8px 0; color: #ffffff; font-size: 14px;">${escapeHtml(guest.name)}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #90caf9; font-size: 14px;">RSVP Status:</td>
+            <td style="padding: 8px 0; color: #ffffff; font-size: 14px;">${escapeHtml(guest.rsvpStatus)}</td>
+          </tr>
+        </table>
+
+        <!-- Event Details -->
+        <h2 style="color: #42a5f5; font-size: 16px; letter-spacing: 1px; margin: 0 0 12px; text-transform: uppercase;">EVENT DETAILS</h2>
+        <table style="width: 100%; margin-bottom: 24px; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 8px 0; color: #90caf9; font-size: 14px; vertical-align: top;">📅 Date:</td>
+            <td style="padding: 8px 0; color: #ffffff; font-size: 14px;">September 5, 2026 &bull; 3:00 PM</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #90caf9; font-size: 14px; vertical-align: top;">📍 Location:</td>
+            <td style="padding: 8px 0; color: #ffffff; font-size: 14px;">
+              <a href="https://maps.app.goo.gl/wWNuKUMiy7fU1UqX6" style="color: #64b5f6; text-decoration: underline;">Lot 2 Blk 209 Viscara Street, New Lower Bicutan, Taguig City</a>
+            </td>
+          </tr>
+        </table>
+
+        <p style="color: #e3f2fd; font-size: 15px; margin: 0 0 10px;">
+          We look forward to celebrating with you! 💙
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div style="background: rgba(21, 101, 192, 0.2); padding: 16px 30px; text-align: center; border-top: 1px solid rgba(66, 165, 245, 0.2);">
+        <p style="margin: 0; color: #78909c; font-size: 12px;">
+          This is an automated confirmation from the Baby Shower Guest Registration App.
+        </p>
+      </div>
     </div>
   `;
 
