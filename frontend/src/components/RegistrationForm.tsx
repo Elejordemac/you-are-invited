@@ -130,7 +130,7 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
           {/* Hex pattern background overlay */}
           <div className={styles.hexOverlay} aria-hidden="true" />
 
-          {/* Healing Pod in background - baby healing behind everything */}
+          {/* Healing Pod in background - baby hero reveal then fade to bg */}
           <div className={styles.healingPodBg} aria-hidden="true">
             <HealingPod />
           </div>
@@ -153,21 +153,21 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
           <div className={`${styles.particle} ${styles.particle3}`} aria-hidden="true" />
 
           <div className={styles.inviteContent}>
-            <div className={`${styles.badge} ${styles.animateIn}`} style={{ animationDelay: '0s' }}>YOU'RE INVITED</div>
+            <div className={`${styles.badge} ${styles.animateIn}`} style={{ animationDelay: '2s' }}>YOU'RE INVITED</div>
             
-            <h1 className={`${styles.heroTitle} ${styles.animateIn}`} style={{ animationDelay: '0.2s' }}>
+            <h1 className={`${styles.heroTitle} ${styles.animateIn}`} style={{ animationDelay: '2.2s' }}>
               <span className={styles.titleGlow}>Baby Shower</span>
             </h1>
 
-            <div className={`${styles.parents} ${styles.animateIn}`} style={{ animationDelay: '0.4s' }}>
+            <div className={`${styles.parents} ${styles.animateIn}`} style={{ animationDelay: '2.4s' }}>
               <span className={styles.parentName}>Mark Rhey Elejorde</span>
               <span className={styles.ampersand}>&</span>
               <span className={styles.parentName}>Rochelle Ann Reyos</span>
             </div>
 
-            <div className={`${styles.divider} ${styles.animateIn}`} style={{ animationDelay: '0.6s' }} aria-hidden="true" />
+            <div className={`${styles.divider} ${styles.animateIn}`} style={{ animationDelay: '2.6s' }} aria-hidden="true" />
 
-            <div className={`${styles.eventInfo} ${styles.animateIn}`} style={{ animationDelay: '0.7s' }}>
+            <div className={`${styles.eventInfo} ${styles.animateIn}`} style={{ animationDelay: '2.7s' }}>
               <div className={styles.infoRow}>
                 <span className={styles.infoIcon}>📅</span>
                 <span className={styles.infoText}>September 5, 2026 &bull; 3:00 PM</span>
@@ -187,7 +187,7 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
             </div>
 
             {/* Countdown Timer */}
-            <div className={`${styles.countdown} ${styles.animateIn}`} style={{ animationDelay: '0.8s' }}>
+            <div className={`${styles.countdown} ${styles.animateIn}`} style={{ animationDelay: '2.9s' }}>
               <div className={styles.countdownRow}>
                 <div className={styles.countdownBlock}>
                   <span className={styles.countdownNumber}>{timeRemaining.days}</span>
@@ -209,7 +209,7 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
               <p className={styles.countdownText}>until the Baby Shower!</p>
             </div>
 
-            <div className={`${styles.buttonStack} ${styles.animateIn}`} style={{ animationDelay: '0.9s' }}>
+            <div className={`${styles.buttonStack} ${styles.animateIn}`} style={{ animationDelay: '3.1s' }}>
               <button
                 className={styles.proceedBtn}
                 onClick={() => setScreen('rsvp')}
